@@ -12,3 +12,12 @@ Cable::Cable() {
         pinsOutput[i] = outputPins[i];
     }
 }
+
+void Cable::begin() {
+    Serial.begin(9600);
+    // Initialiser les broches
+    for (int i = 0; i < 8; i++) {
+        pinMode(pinsInput[i], INPUT);
+        pinMode(pinsOutput[i], OUTPUT);
+    }
+}
