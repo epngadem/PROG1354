@@ -21,3 +21,31 @@ void Cable::begin() {
         pinMode(pinsOutput[i], OUTPUT);
     }
 }
+
+void Cable::testCable() {
+    bool straight = true;
+    bool crossed = true;
+
+    // Tester chaque paire de broches
+    for (int i = 0; i < 8; i++) {
+        digitalWrite(pinsOutput[i], HIGH);
+        delay(10);
+        if (digitalRead(pinsInput[i]) != HIGH) {
+            straight = false;
+        }
+        digitalWrite(pinsOutput[i], LOW);
+        delay(10);
+        if (digitalRead(pinsInput[i]) != LOW) {
+            crossed = false;
+        }
+    }
+
+    // Afficher le résultat du test
+    if (straight) {
+        Serial.println("Le câble est droit.");
+    } else if (crossed) {
+        Serial.println("Le câble est croisé.");
+    } else {
+        Serial.println("Le câble est défectueux, DOMMAGE");
+    }
+}
